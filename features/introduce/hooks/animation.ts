@@ -1,9 +1,10 @@
 import { useEffect, useRef } from "react";
+import { useSwiperSlide } from 'swiper/react';
 import anime from 'animejs'
 
-export const useAnimeIntroduce = (activeIndex: number) => {
+export const useAnimeIntroduce = () => {
+  const swiperSlide = useSwiperSlide();
 
-  const socicalAnimation = useRef<any>()
   const animationLine = useRef<any>()
   const animationTxt = useRef<any>()
   const animationPlanetMedium = useRef<any>()
@@ -19,18 +20,6 @@ export const useAnimeIntroduce = (activeIndex: number) => {
       duration: 1400,
       delay: (el: any, i: number) => 200 * (i + 1),
       endDelay: 500
-    });
-
-    socicalAnimation.current = anime({
-      targets: '.social .el',
-      // loop: true,
-      translateX: -170,
-      delay: function(el: any, i: number, l: any) {
-        return i * 100;
-      },
-      endDelay: function (el: any, i: number, l: number) {
-        return (l - i) * 100;
-      }
     });
 
     animationLine.current = anime.timeline({
@@ -68,14 +57,12 @@ export const useAnimeIntroduce = (activeIndex: number) => {
   })
 
   useEffect(() => {
-    if (activeIndex) {
+    if (swiperSlide.isActive) {
       resetAnimationIntroduce()
     }
-  }, [activeIndex])
+  }, [swiperSlide.isActive])
 
   const resetAnimationIntroduce = () => {
-    console.log(animationPlanetSmall)
-    socicalAnimation.current?.restart()
     animationLine.current?.restart()
     animationTxt.current?.restart()
   }
