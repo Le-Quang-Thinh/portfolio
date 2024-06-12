@@ -9,9 +9,14 @@ export const useAnimeIntroduce = () => {
   const animationTxt = useRef<any>()
   const animationPlanetMedium = useRef<any>()
   const animationPlanetSmall = useRef<any>()
+  const animationMain = useRef<any>()
 
   useEffect(() => {
-    if(animationTxt.current) return
+    if(!swiperSlide.isActive) return
+    if (animationTxt.current) {
+      resetAnimationIntroduce()
+      return
+    }
     animationTxt.current = anime({
       targets: '.animation-txt .text-main',
       opacity: [0, 1],
@@ -20,6 +25,13 @@ export const useAnimeIntroduce = () => {
       duration: 1400,
       delay: (el: any, i: number) => 200 * (i + 1),
       endDelay: 500
+    });
+
+    animationMain.current = anime({
+      targets: '.main-planet',
+      opacity: [0, 1],
+      easing: "linear",
+      duration: 1000,
     });
 
     animationLine.current = anime.timeline({
@@ -54,16 +66,10 @@ export const useAnimeIntroduce = () => {
       delay: 0,
       perspective: 1000
     });
-  })
-
-  useEffect(() => {
-    if (swiperSlide.isActive) {
-      resetAnimationIntroduce()
-    }
   }, [swiperSlide.isActive])
 
   const resetAnimationIntroduce = () => {
-    animationLine.current?.restart()
+    // animationLine.current?.restart()
     animationTxt.current?.restart()
   }
   

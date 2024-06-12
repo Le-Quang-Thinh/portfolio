@@ -1,10 +1,10 @@
 import React, { memo } from "react";
 import Image from 'next/image'
-import { useAnimeProfile } from '../hooks/animation'
+import { useAnimationFooter } from 'hooks/useAnimationFooter'
 import { Socials, socialType } from 'features/dataStatic/social'
 
 const Footer = () => {
-  useAnimeProfile()
+  useAnimationFooter()
   return (
     <div className='w-full h-full flex justify-center items-center relative footer'>
       <div className="social cursor-pointer flex justify-center items-center flex-col w-1/2">

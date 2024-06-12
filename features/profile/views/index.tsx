@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import Image from 'next/image'
-import { useAnimeProfile } from '../hooks/animation'
+import { useAnimeProfile } from 'hooks/useAnimationProfile'
 
 // exampleArr: Array<{ id: number, msg: string}> 
 const Profile = () => {

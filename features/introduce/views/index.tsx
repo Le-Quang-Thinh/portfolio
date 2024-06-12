@@ -1,8 +1,13 @@
 import React, { memo } from "react";
-import { useAnimeIntroduce } from '../hooks/animation'
+import { useAnimeIntroduce } from 'hooks/useAnimationIntroduce'
+
+const defaultLeft = 620
+const defaltSpace = 120
+const line = Array.from(Array(8).keys())
 
 const Introduce = () => {
   useAnimeIntroduce()
+
   return (
     <div className='w-full h-full text-black relative p-4'>
       <div className="text-3xl font-normal flex h-full w-auto items-center justify-between">
@@ -15,15 +20,13 @@ const Introduce = () => {
           </div>
         </div>
         <div className="animation-line relative right-0 bottom-0 h-[800px] w-[640px] xl:block md:hidden">
-          <div className='line absolute left-[620px] bottom-0 bg-secondly origin-[0%_50%] w-[0px] h-[1px] rotate-[-45deg]'></div>
-          <div className='line absolute left-[500px] bottom-0 bg-secondly origin-[0%_50%] w-[0px] h-[1px] rotate-[-45deg]'></div>
-          <div className='line absolute left-[380px] bottom-0 bg-secondly origin-[0%_50%] w-[0px] h-[1px] rotate-[-45deg]'></div>
-          <div className='line absolute left-[260px] bottom-0 bg-secondly origin-[0%_50%] w-[0px] h-[1px] rotate-[-45deg]'></div>
-          <div className='line absolute left-[140px] bottom-0 bg-secondly origin-[0%_50%] w-[0px] h-[1px] rotate-[-45deg]'></div>
-          <div className='line absolute left-[20px] bottom-0 bg-secondly origin-[0%_50%] w-[0px] h-[1px] rotate-[-45deg]'></div>
-          <div className='line absolute left-[-100px] bottom-0 bg-secondly origin-[0%_50%] w-[0px] h-[1px] rotate-[-45deg]'></div>
-          <div className='line absolute left-[-220px] bottom-0 bg-secondly origin-[0%_50%] w-[0px] h-[1px] rotate-[-45deg]'></div>
-          <div className="main-planet absolute left-[128px] top-[280px] w-[320px] h-[320px] rounded-full border-2 border-secondly bg-regal-blue">
+          {line.map((i: number) => {
+            return (
+              <div key={`line-${i}`} className={`line absolute left-[${defaultLeft - i * defaltSpace}px] bottom-0 bg-secondly origin-[0%_50%] w-[0px] h-[1px] rotate-[-45deg]`} />
+            )
+          })}
+          
+          <div className="main-planet opacity-0 absolute left-[128px] top-[280px] w-[320px] h-[320px] rounded-full border-2 border-secondly bg-regal-blue">
             <div className='w-[320px] h-[320px] medium-planet relative top-0 left-0'>
               <div className='w-[80px] h-[80px] rounded-full border-2 border-secondly top-[25px] absolute bg-regal-blue' />
             </div>

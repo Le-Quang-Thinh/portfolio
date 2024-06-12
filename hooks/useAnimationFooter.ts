@@ -2,7 +2,7 @@ import { DOMAttributes, useEffect, useRef } from "react";
 import { useSwiperSlide } from 'swiper/react';
 import anime from 'animejs'
 
-export const useAnimeProfile = () => {
+export const useAnimationFooter = () => {
 
   const swiperSlide = useSwiperSlide();
   const socicalAnimation = useRef<any>()
@@ -10,7 +10,11 @@ export const useAnimeProfile = () => {
   const line2 = useRef<any>()
 
   useEffect(() => {
-    if (socicalAnimation.current) return
+    if(!swiperSlide.isActive) return
+    if (socicalAnimation.current) {
+      resetAnimationFooter()
+      return
+    }
 
     const zone:DOMAttributes = document.querySelector(".footer");
     const zoneArea = zone.getBoundingClientRect(); 
@@ -64,20 +68,13 @@ export const useAnimeProfile = () => {
       });
     }
   
-  })
-
-  useEffect(() => {
-    if (swiperSlide.isActive) {
-      resetAnimationIntroduce()
-    }
   }, [swiperSlide.isActive])
 
-
-  const resetAnimationIntroduce = () => {
+  const resetAnimationFooter = () => {
     socicalAnimation.current.restart()
   }
   
   return {
-    resetAnimationIntroduce
+    resetAnimationFooter
   }
 }

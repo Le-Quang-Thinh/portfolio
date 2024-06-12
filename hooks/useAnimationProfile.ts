@@ -10,7 +10,11 @@ export const useAnimeProfile = () => {
   const textRef = useRef<any>()
 
   useEffect(() => {
-    if(imageRef.current) return
+    if(!swiperSlide.isActive) return
+    if (imageRef.current) {
+      resetAnimationProfile()
+      return
+    }
     imageRef.current = anime({
       targets: '.avatar',
       translateX: [-300, 150], 
@@ -27,20 +31,14 @@ export const useAnimeProfile = () => {
       endDelay: 500
     });
 
-  })
-
-  useEffect(() => {
-    if (swiperSlide.isActive) {
-      resetAnimationIntroduce()
-    }
   }, [swiperSlide.isActive])
 
-  const resetAnimationIntroduce = () => {
+  const resetAnimationProfile = () => {
     imageRef.current.restart()
     textRef.current.restart()
   }
   
   return {
-    resetAnimationIntroduce
+    resetAnimationProfile
   }
 }
